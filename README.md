@@ -1,6 +1,3 @@
-Certainly! Here's the modified content tailored for the `README.md` file:
-
-```markdown
 # Baacumen-Learning
 
 Welcome to the Baacumen-Learning repository! 🚀 This space is dedicated to training, learning, and demonstration purposes, providing a collaborative environment for enthusiasts to enhance their skills and showcase their knowledge.
