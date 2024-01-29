@@ -23,6 +23,6 @@ Please note that all content in this repository is intended for educational purp
 
 ## Connect with Us
 
-Join our community discussions, share your insights, and ask questions on our [Contact Us]([link-to-discussion-board](https://www.baacumen.com/contact)).
+Join our community discussions, share your insights, and ask questions on our [Contact Us](https://www.baacumen.com/contact).
 
 Let's learn, code, and grow together! Happy coding! 🚀
