@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machine Learning Model Deployment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        label {
+            margin-bottom: 10px;
+            width: 100%;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+            padding: 2px;
+            margin-top: 10px;
+        }
+
+        button,
+        input[type="reset"] {
+            flex: 1;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover,
+        input[type="reset"]:hover {
+            background-color: #45a049;
+        }
+
+        #predictionResult {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Welcome to our Machine Learning App Deployment Tutorial</h1>
+
+    <form id="predictionForm">
+        <label for="feature1">Sepal length:</label>
+        <input type="text" id="feature1" name="feature1" placeholder="Enter Feature 1" required>
+
+        <label for="feature2">Sepal width:</label>
+        <input type="text" id="feature2" name="feature2" placeholder="Enter Feature 2" required>
+
+        <label for="feature3">Petal length:</label>
+        <input type="text" id="feature3" name="feature3" placeholder="Enter Feature 3" required>
+
+        <label for="feature4">Petal width:</label>
+        <input type="text" id="feature4" name="feature4" placeholder="Enter Feature 4" required>
+
+        <div class="button-container">
+            <button type="button" onclick="predict()">Predict</button>
+        </div>
+        <div class="button-container">
+            <input type="reset" value="Reset" onclick="resetPrediction()">
+        </div>
+    </form>
+
+    <p id="predictionResult"></p>
+
+    <script>
+        function predict() {
+            // Get input data from the form
+            var feature1 = document.getElementById("feature1").value.trim();
+            var feature2 = document.getElementById("feature2").value.trim();
+            var feature3 = document.getElementById("feature3").value.trim();
+            var feature4 = document.getElementById("feature4").value.trim();
+
+            // Validate input data
+            if (!feature1 || !feature2 || !feature3 || !feature4) {
+                alert("All fields are required");
+                return;
+            }
+
+            // Send input data to the Flask server for prediction
+            fetch('/predict', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        'input_data': [parseFloat(feature1), parseFloat(feature2), parseFloat(feature3), parseFloat(feature4)]
+                    }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Display the prediction result on the webpage
+                    document.getElementById("predictionResult").innerHTML = "Predicted species: " + data.prediction;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+
+        }
+
+        function resetPrediction() {
+            console.log("Reset button clicked");
+            // Reset the prediction result
+            document.getElementById("predictionResult").innerHTML = "";
+            document.getElementById("predictionForm").reset();
+        }
+    </script>
+</body>
+
+</html>
